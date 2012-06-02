@@ -75,14 +75,14 @@ Yascli 是从[HouseMD](http://github.com/zhongl/housemd)中独立出来的scala�
 
 这是最简单的例子, yascli支持丰富的扩展:
 
-1. 值类型转换
-1. 值有效校验
-1. 可选参数
-1. 多值参数
-1. 组命令行
-1. 交互式命令, 参数`tab`自动补全等
+1. [值类型转换](https://github.com/zhongl/yascli/blob/master/src/test/scala/com/github/zhongl/yascli/CommandSpec.scala)
+1. [值有效校验](https://github.com/zhongl/yascli/blob/master/src/test/scala/com/github/zhongl/yascli/CommandSpec.scala)
+1. [可选参数](https://github.com/zhongl/yascli/blob/master/src/test/scala/com/github/zhongl/yascli/CommandSpec.scala)
+1. [多值参数](https://github.com/zhongl/yascli/blob/master/src/test/scala/com/github/zhongl/yascli/CommandSpec.scala)
+1. [组命令行](https://github.com/zhongl/yascli/blob/master/src/test/scala/com/github/zhongl/yascli/SuiteSpec.scala)
+1. [交互式命令, 参数`tab`自动补全](https://github.com/zhongl/yascli/blob/master/src/test/scala/com/github/zhongl/yascli/ShellSpec.scala)等
 
-更多例子, 请见[测试用例]()
+更多例子, 请见[`Unit Test Case`](https://github.com/zhongl/yascli/tree/master/src/test/scala/com/github/zhongl/yascli)
 
 # 类似开源项目
 
