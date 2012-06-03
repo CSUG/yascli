@@ -55,6 +55,8 @@ abstract class Shell(
     }
 
     parse(reader.readLine())
+
+    reader.shutdown()
   }
 
   object Quit extends Command("quit", "terminate the process.", PrintOut(reader)) {
@@ -67,7 +69,7 @@ abstract class Shell(
 
     import collection.JavaConversions._
 
-    private val RE0 = """\s+""".r
+    private val RE0 = """\s*""".r
     private val RE1 = """\s*(\w+)""".r
     private val RE2 = """\s*(\w+)(.+)""".r
 

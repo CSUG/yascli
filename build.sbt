@@ -2,14 +2,16 @@ name := "yascli"
 
 organization := "com.github.zhongl"
 
-version := "0.0.1"
+version := "0.0.2"
 
 scalaVersion := "2.9.2"
 
 crossScalaVersions := Seq("2.9.0","2.9.1","2.9.2")
 
+resolvers += "Local Maven Repository" at "file://"+Path.userHome.absolutePath+"/.m2/repository"
+
 libraryDependencies := Seq(
-      "jline"           %   "jline"         % "2.6",
+      "jline"           %   "jline"         % "2.7-SNAPSHOT" ,
       "org.mockito"     %   "mockito-all"   % "1.9.0" % "test",
       "org.scalatest"   %%  "scalatest"     % "1.7.2" % "test"
 )
