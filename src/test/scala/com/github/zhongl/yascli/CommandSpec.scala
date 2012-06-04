@@ -175,6 +175,15 @@ class CommandSpec extends FunSpec with ShouldMatchers {
       exception.value should be("nonexist")
       exception.explain should be(", it should be an existed file")
     }
+
+    it("should reset last values state") {
+      val command = new Base {
+        val param = parameter[String]("param", "set param", Some("b"))
+      }
+      command main (Array("a"))
+      command main (Array())
+      command param() should be ("b")
+    }
   }
 
 }

@@ -22,7 +22,8 @@ import annotation.tailrec
 /**
  * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
  */
-abstract class Command(val name: String, val description: String, val out: PrintOut = PrintOut(System.out)) extends Runnable {
+abstract class Command(val name: String, val description: String, val out: PrintOut = PrintOut(System.out))
+  extends Runnable {
 
   private val options    = ListBuffer.empty[Option[_]]
   private val parameters = ListBuffer.empty[Parameter[_]]
@@ -39,7 +40,7 @@ abstract class Command(val name: String, val description: String, val out: Print
     !parameters.isEmpty ? ("\nParameters:\n" + parameters.mkString("\n"))
 
   def parse(arguments: Array[String]) {
-
+    values.clear() // reset last state
     @tailrec
     def read(list: List[String])(implicit index: Int = 0) {
       list match {
