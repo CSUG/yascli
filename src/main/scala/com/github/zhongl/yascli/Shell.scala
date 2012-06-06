@@ -47,7 +47,7 @@ abstract class Shell(
       if (line == null) return
       val array = line.trim.split("\\s+")
       try {
-        run(array.head, array.tail) { name => println("Unknown command: " + name) }
+        if (!array.head.isEmpty) run(array.head, array.tail) { name => println("Unknown command: " + name) }
       } catch {
         case e: QuitException => return
         case t                => error(t)

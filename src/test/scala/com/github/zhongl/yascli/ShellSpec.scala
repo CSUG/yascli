@@ -109,6 +109,13 @@ class ShellSpec extends FunSpec with ShouldMatchers {
           |ERROR: Missing parameter: str
           |shell> """.stripMargin)
     }
+
+    it("should do nothing") {
+      val bout = new ByteArrayOutputStream()
+      val shell = new AShell("  \n", bout)
+      shell main (Array())
+      bout.toString should be("shell>   \nshell> ")
+    }
   }
 
 }
