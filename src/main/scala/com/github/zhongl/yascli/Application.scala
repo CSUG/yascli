@@ -17,8 +17,8 @@
 package com.github.zhongl.yascli
 
 /**
-* @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
-*/
+  * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
+  */
 trait Application {self: Command =>
 
   private val printHelp = flag("-h" :: "--help" :: Nil, "show help infomation of this command.")
@@ -28,9 +28,7 @@ trait Application {self: Command =>
       parse(arguments)
       if (printHelp()) println(help) else run()
     } catch {
-      case UnknownOptionException(option)          => println("Unknown option: " + option)
-      case MissingParameterException(parameter)    => println("Missing parameter: " + parameter)
-      case ConvertingException(id, value, explain) => println("Invalid " + id + " value: " + value + explain)
+      case t => println(t)
     }
   }
 }

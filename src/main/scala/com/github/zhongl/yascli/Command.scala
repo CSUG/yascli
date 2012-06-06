@@ -20,8 +20,8 @@ import collection.mutable.{ListBuffer, Map}
 import annotation.tailrec
 
 /**
- * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
- */
+  * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
+  */
 abstract class Command(val name: String, val description: String, val out: PrintOut = PrintOut(System.out))
   extends Runnable {
 
@@ -116,9 +116,9 @@ abstract class Command(val name: String, val description: String, val out: Print
 
   private def eval[T](name: String, defaultValue: scala.Option[T])
     (implicit convert: String => T) = values get name match {
-    case None        => defaultValue.getOrElse {throw MissingParameterException(name)}
+    case None        => defaultValue.getOrElse {throw new MissingParameterException(name)}
     case Some(value) => try {convert(value)} catch {
-      case t: Throwable => throw ConvertingException(name, value, t.getMessage)
+      case t: Throwable => throw new ConvertingException(name, value, t.getMessage)
     }
   }
 

@@ -22,8 +22,8 @@ import java.util.List
 import jline.console.completer.{NullCompleter, Completer}
 
 /**
- * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
- */
+  * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
+  */
 abstract class Shell(
   name: String,
   description: String,
@@ -50,6 +50,7 @@ abstract class Shell(
         run(array.head, array.tail) { name => println("Unknown command: " + name) }
       } catch {
         case e: QuitException => return
+        case t                => error(t)
       }
       parse(reader.readLine())
     }

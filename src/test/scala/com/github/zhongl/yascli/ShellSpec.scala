@@ -22,15 +22,21 @@ import java.io.{OutputStream, ByteArrayInputStream, PrintStream, ByteArrayOutput
 import jline.console.ConsoleReader
 
 /**
- * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
- */
+  * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
+  */
 class ShellSpec extends FunSpec with ShouldMatchers {
+
+  class Length(out: PrintOut) extends Command("len", "get length of string.", out) {
+    private val param = parameter[String]("str", "a string")
+
+    def run() { println(param().length) }
+  }
 
   class AShell(line: String, out: OutputStream) extends Shell(
     name = "shell",
     description = "a shell example",
     reader = new ConsoleReader(new ByteArrayInputStream(line.getBytes), new PrintStream(out))) {
-    protected def commands = helpCommand :: Quit :: Nil
+    protected def commands = helpCommand :: Quit :: new Length(PrintOut(out)) :: Nil
   }
 
   private val backspace = "\u001B[K"
@@ -48,6 +54,7 @@ class ShellSpec extends FunSpec with ShouldMatchers {
           |
           |help    display this infomation.
           |quit    terminate the process.
+          |len     get length of string.
           |
           |shell> """.stripMargin)
     }
@@ -90,6 +97,16 @@ class ShellSpec extends FunSpec with ShouldMatchers {
       bout.toString should be(
         """shell> help unknow
           |Unknown command: unknow
+          |shell> """.stripMargin)
+    }
+
+    it("should display error message") {
+      val bout = new ByteArrayOutputStream()
+      val shell = new AShell("len\n", bout)
+      shell main (Array())
+      bout.toString should be(
+        """shell> len
+          |ERROR: Missing parameter: str
           |shell> """.stripMargin)
     }
   }

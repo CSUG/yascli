@@ -22,8 +22,14 @@ package com.github.zhongl.yascli
 
 class CommandException extends Exception
 
-case class ConvertingException(name: String, value: String, explain: String) extends CommandException
+class ConvertingException(val name: String, val value: String, val explain: String) extends CommandException{
+  override def toString = "Invalid " + name + " value: " + value + explain
+}
 
-case class MissingParameterException(name: String) extends CommandException
+class MissingParameterException(val name: String) extends CommandException {
+  override def toString = "Missing parameter: " + name
+}
 
-case class UnknownOptionException(name: String) extends CommandException
+class UnknownOptionException(val name: String) extends CommandException {
+  override def toString = "Unknown option: " + name
+}
