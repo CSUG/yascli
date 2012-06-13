@@ -22,8 +22,8 @@ import java.util.List
 import jline.console.completer.{NullCompleter, Completer}
 
 /**
-  * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
-  */
+ * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
+ */
 abstract class Shell(
   name: String,
   description: String,
@@ -70,14 +70,14 @@ abstract class Shell(
 
     import collection.JavaConversions._
 
-    private val RE0 = """\s*""".r
-    private val RE1 = """\s*(\w+)""".r
-    private val RE2 = """\s*(\w+)(.+)""".r
-
-    def complete(buffer: String, cursor: Int, candidates: List[CharSequence]) = buffer match {
-      case null | RE0() => candidates.addAll(commandNames); cursor
-      case RE1(p)       => candidates.addAll(commandNamesStartsWith(p)); cursor - p.length
-      case RE2(n, p)    => argumentComplete(n, p, cursor, candidates)
+    def complete(buffer: String, cursor: Int, candidates: List[CharSequence]) = {
+      buffer.substring(0, cursor).split("\\s+", 2) match {
+        case Array()     => candidates.addAll(commandNames); cursor
+        case Array(p)    => candidates.addAll(commandNamesStartsWith(p)); cursor - p.length
+        case Array(n, p) =>
+          val r = argumentComplete(n, p, p.length, candidates)
+          if (r < 0) -1 else cursor - p.length + r
+      }
     }
 
     protected def argumentComplete(name: String, prefix: String, cursor: Int, candidates: List[CharSequence]): Int
