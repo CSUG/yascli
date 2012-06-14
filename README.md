@@ -9,8 +9,6 @@ Yascli 是从[HouseMD](http://github.com/zhongl/housemd)中独立出来的scala�
 
 # 从源码安装
 
-1. `git clone https://github.com/jline/jline2.git`, yascli依赖jLine-2.7以上版本
-1. `mvn clean install`, 构建发布最新的jLine到本地Maven库
 1. `git clone https://github.com/zhongl/yascli.git`
 1. `sbt publish-local` 构建并发布到本地ivy库, 或是 `sbt publish` 发布到本地maven库
 
