@@ -18,5 +18,39 @@ libraryDependencies := Seq(
 
 publishMavenStyle := true
 
-publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository")))
+publishArtifact in Test := false
+
+pomIncludeRepository := { _ => false }
+
+pomExtra := (
+  <url>http://jsuereth.com/scala-arm</url>
+  <licenses>
+      <license>
+        <name>The Apache Software License, Version 2.0</name>
+        <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        <distribution>repo</distribution>
+        <comments>A business-friendly OSS license</comments>
+      </license>
+    </licenses>
+  <scm>
+    <url>git@github.com:zhongl/yascli.git</url>
+    <connection>scm:git:git@github.com:zhongl/yascli.git</connection>
+  </scm>
+  <developers>
+    <developer>
+      <id>zhongl</id>
+      <name>Lunfu Zhong</name>
+      <url>http://github.com/zhongl</url>
+    </developer>
+  </developers>)
+
+// publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository")))
+
+publishTo <<= version { (v: String) =>
+  val nexus = "https://oss.sonatype.org/"
+  if (v.trim.endsWith("SNAPSHOT"))
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+}
 
