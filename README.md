@@ -7,13 +7,6 @@ Yascli 是从[HouseMD](http://github.com/zhongl/housemd)中独立出来的scala�
     1. 组命令行, 如 `git add`
     1. 交互命令行, 如 `ftp> help`
 
-# 从源码安装
-
-1. `git clone https://github.com/zhongl/yascli.git`
-1. `sbt publish-local` 构建并发布到本地ivy库, 或是 `sbt publish` 发布到本地maven库
-
-> 没有`sbt`? 可以在[这里](http://www.scala-sbt.org/download.html)下载安装`sbt`
-
 # 配置依赖
 
 ## SBT
