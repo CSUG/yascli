@@ -2,7 +2,7 @@ name := "yascli"
 
 organization := "com.github.zhongl"
 
-version := "0.0.2"
+version := "0.1.0"
 
 scalaVersion := "2.9.2"
 
@@ -23,7 +23,7 @@ publishArtifact in Test := false
 pomIncludeRepository := { _ => false }
 
 pomExtra := (
-  <url>http://jsuereth.com/scala-arm</url>
+  <url>http://zhongl.github.com/yascli</url>
   <licenses>
       <license>
         <name>The Apache Software License, Version 2.0</name>
@@ -46,6 +46,7 @@ pomExtra := (
 
 // publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository")))
 
+
 publishTo <<= version { (v: String) =>
   val nexus = "https://oss.sonatype.org/"
   if (v.trim.endsWith("SNAPSHOT"))
@@ -53,4 +54,5 @@ publishTo <<= version { (v: String) =>
   else
     Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
+
 

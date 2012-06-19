@@ -20,15 +20,14 @@ import collection.mutable.{ListBuffer, Map}
 import annotation.tailrec
 
 /**
-  * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
-  */
+ * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
+ */
 abstract class Command(val name: String, val description: String, val out: PrintOut = PrintOut(System.out))
-  extends Runnable {
+  extends Runnable with Loggable {
 
   private val options    = ListBuffer.empty[Option[_]]
   private val parameters = ListBuffer.empty[Parameter[_]]
   private val values     = Map.empty[String, String]
-  private val CR         = System.getProperty("line.separator")
 
   implicit private val enhanceBoolean = (b: Boolean) => new {def ?(t: => String, f: => String = "") = if (b) t else f}
 
@@ -41,6 +40,7 @@ abstract class Command(val name: String, val description: String, val out: Print
 
   def parse(arguments: Array[String]) {
     values.clear() // reset last state
+
     @tailrec
     def read(list: List[String])(implicit index: Int = 0) {
       list match {
@@ -52,18 +52,6 @@ abstract class Command(val name: String, val description: String, val out: Print
 
     read(arguments.toList)
   }
-
-  protected def info(s: Any) { println("INFO : " + s) }
-
-  protected def warn(s: Any) { println("WARN : " + s) }
-
-  protected def error(s: Any) { println("ERROR: " + s) }
-
-  protected final def print(a: Any) { out.print(a.toString) }
-
-  protected final def println() { print(CR) }
-
-  protected final def println(a: Any) { print(a.toString + CR) }
 
   protected final def flag(names: List[String], description: String) =
     option[Boolean](names, description, false)(manifest[Boolean], Converters.string2Boolean)
@@ -122,7 +110,7 @@ abstract class Command(val name: String, val description: String, val out: Print
     }
   }
 
-  case class Option[T: Manifest](names: List[String], description: String, defaultValue: T) {
+  private case class Option[T: Manifest](names: List[String], description: String, defaultValue: T) {
     override def toString = {
       val isNotFlag = !isFlag
 
@@ -134,7 +122,7 @@ abstract class Command(val name: String, val description: String, val out: Print
     def isFlag = manifest[T].erasure == classOf[Boolean]
   }
 
-  case class Parameter[T: Manifest](name: String, description: String, optional: Boolean) {
+  private case class Parameter[T: Manifest](name: String, description: String, optional: Boolean) {
     override def toString = "\t" + name + "\n\t\t" + description
 
     def repr = { val s = isVarLength ?(name + "...", name); optional ?("[" + s + "]", s) }
