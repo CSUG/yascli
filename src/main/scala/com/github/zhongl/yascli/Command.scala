@@ -110,7 +110,7 @@ abstract class Command(val name: String, val description: String, val out: Print
     }
   }
 
-  case class Option[T: Manifest](names: List[String], description: String, defaultValue: T) {
+  private case class Option[T: Manifest](names: List[String], description: String, defaultValue: T) {
     override def toString = {
       val isNotFlag = !isFlag
 
@@ -122,7 +122,7 @@ abstract class Command(val name: String, val description: String, val out: Print
     def isFlag = manifest[T].erasure == classOf[Boolean]
   }
 
-  case class Parameter[T: Manifest](name: String, description: String, optional: Boolean) {
+  private case class Parameter[T: Manifest](name: String, description: String, optional: Boolean) {
     override def toString = "\t" + name + "\n\t\t" + description
 
     def repr = { val s = isVarLength ?(name + "...", name); optional ?("[" + s + "]", s) }
