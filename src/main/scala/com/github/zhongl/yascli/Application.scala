@@ -17,9 +17,10 @@
 package com.github.zhongl.yascli
 
 /**
-  * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
-  */
-trait Application {self: Command =>
+ * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
+ */
+trait Application {
+  self: Command =>
 
   private val printHelp = flag("-h" :: "--help" :: Nil, "show help infomation of this command.")
 
@@ -28,7 +29,7 @@ trait Application {self: Command =>
       parse(arguments)
       if (printHelp()) println(help) else run()
     } catch {
-      case t => println(t)
+      case t: Throwable => println(t)
     }
   }
 }

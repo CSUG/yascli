@@ -50,7 +50,7 @@ abstract class Shell(
         if (!array.head.isEmpty) run(array.head, array.tail) { name => println("Unknown command: " + name) }
       } catch {
         case e: QuitException => return
-        case t                => error(t)
+        case t: Throwable     => error(t)
       }
       parse(reader.readLine())
     }
@@ -97,7 +97,7 @@ abstract class Shell(
     protected def argumentComplete(name: String, prefix: String, cursor: Int, candidates: List[CharSequence]) =
       completerOfCommand(name).complete(prefix, cursor, candidates)
 
-    private def completerOfCommand(name: String): Completer = commands find {_.name == name} match {
+    private def completerOfCommand(name: String): Completer = commands find { _.name == name } match {
       case Some(c) if c.isInstanceOf[Completer] => c.asInstanceOf[Completer]
       case Some(c) if c == helpCommand          => HelpCompleter
       case _                                    => NullCompleter.INSTANCE

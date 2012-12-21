@@ -16,6 +16,7 @@
 
 package com.github.zhongl.yascli
 
+import language.reflectiveCalls
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
 import java.io.File

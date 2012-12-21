@@ -19,7 +19,7 @@ package com.github.zhongl.yascli;
 import scala.*;
 import scala.collection.immutable.List;
 import scala.reflect.Manifest;
-import scala.reflect.Manifest$;
+import scala.reflect.ManifestFactory$;
 import scala.runtime.AbstractFunction1;
 
 import java.lang.Boolean;
@@ -27,7 +27,7 @@ import java.lang.Boolean;
 /**
  * @author <a href="mailto:zhong.lunfu@gmail.com">zhongl<a>
  */
-public class JavaConvertions {
+public final class JavaConvertions {
     private static final AbstractFunction1<String, String> TO_STRING = new AbstractFunction1<String, String>() {
         @Override
         public String apply(String value) {
@@ -36,7 +36,7 @@ public class JavaConvertions {
     };
 
     public static <T> Manifest<T> manifest(Class<T> klass) {
-        return Manifest$.MODULE$.classType(klass);
+        return ManifestFactory$.MODULE$.classType(klass);
     }
 
     public static <T> Option<T> none(Class<T> klass) {
@@ -44,7 +44,7 @@ public class JavaConvertions {
     }
 
     public static <T> Option<T> some(T value) {
-        return (Option<T>) Some$.MODULE$.apply(value);
+        return Some$.MODULE$.apply(value);
     }
 
     public static Function1<String, String> defaultConverter() {

@@ -17,6 +17,7 @@
 package com.github.zhongl.yascli
 
 import collection.mutable.{ListBuffer, Map}
+import language.reflectiveCalls
 import annotation.tailrec
 
 /**
@@ -114,12 +115,12 @@ abstract class Command(val name: String, val description: String, val out: Print
     override def toString = {
       val isNotFlag = !isFlag
 
-      "\t" + names.mkString(", ") + isNotFlag ? ("=[" + manifest[T].erasure.getSimpleName.toUpperCase + "]") +
+      "\t" + names.mkString(", ") + isNotFlag ? ("=[" + manifest[T].runtimeClass.getSimpleName.toUpperCase + "]") +
         "\n\t\t" + description +
         isNotFlag ? ("\n\t\tdefault: " + defaultValue)
     }
 
-    def isFlag = manifest[T].erasure == classOf[Boolean]
+    def isFlag = manifest[T].runtimeClass == classOf[Boolean]
   }
 
   private case class Parameter[T: Manifest](name: String, description: String, optional: Boolean) {
@@ -127,7 +128,7 @@ abstract class Command(val name: String, val description: String, val out: Print
 
     def repr = { val s = isVarLength ?(name + "...", name); optional ?("[" + s + "]", s) }
 
-    def isVarLength = manifest[T].erasure.isArray
+    def isVarLength = manifest[T].runtimeClass.isArray
   }
 
 }
