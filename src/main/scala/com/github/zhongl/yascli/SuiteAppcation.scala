@@ -16,7 +16,7 @@
 
 package com.github.zhongl.yascli
 
-import language.reflectiveCalls
+
 import Converters._
 
 /**

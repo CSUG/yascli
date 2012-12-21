@@ -16,7 +16,7 @@
 
 package com.github.zhongl.yascli
 
-import language.reflectiveCalls
+
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
 import java.io.File
@@ -29,7 +29,7 @@ class CommandSpec extends FunSpec with ShouldMatchers {
 
   import Converters._
 
-  abstract class Base extends Command("app name","some description", PrintOut(System.out)) {
+  abstract class Base extends Command("app name", "some description", PrintOut(System.out)) {
 
     def run() {}
 
@@ -148,7 +148,7 @@ class CommandSpec extends FunSpec with ShouldMatchers {
     it("should complain unknown option") {
       val command = new Base {}
 
-      val exception = evaluating {command main ("-u".split("\\s+"))} should produce[UnknownOptionException]
+      val exception = evaluating { command main ("-u".split("\\s+")) } should produce[UnknownOptionException]
       exception.name should be("-u")
     }
 
@@ -157,7 +157,7 @@ class CommandSpec extends FunSpec with ShouldMatchers {
         val param = parameter[String]("param", "set param")
       }
       command main (Array())
-      val exception = evaluating {command param()} should produce[MissingParameterException]
+      val exception = evaluating { command param() } should produce[MissingParameterException]
       exception.name should be("param")
     }
 
@@ -171,7 +171,7 @@ class CommandSpec extends FunSpec with ShouldMatchers {
         val file = option[File]("--file" :: Nil, "set a file", new File("default"))
       }
       command main ("--file nonexist".split("\\s+"))
-      val exception = evaluating {command file()} should produce[ConvertingException]
+      val exception = evaluating { command file() } should produce[ConvertingException]
       exception.name should be("--file")
       exception.value should be("nonexist")
       exception.explain should be(", it should be an existed file")
@@ -183,7 +183,7 @@ class CommandSpec extends FunSpec with ShouldMatchers {
       }
       command main (Array("a"))
       command main (Array())
-      command param() should be ("b")
+      command param() should be("b")
     }
   }
 

@@ -6,7 +6,7 @@ version := "0.2.0"
 
 scalaVersion := "2.10.0-RC5"
 
-scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
+scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature", "-language:reflectiveCalls")
 
 javacOptions += "-Xlint:unchecked"
 

@@ -17,7 +17,6 @@
 package com.github.zhongl.yascli
 
 import collection.mutable.{ListBuffer, Map}
-import language.reflectiveCalls
 import annotation.tailrec
 
 /**
