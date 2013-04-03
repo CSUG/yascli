@@ -4,7 +4,7 @@ organization := "com.github.zhongl"
 
 version := "0.2.0"
 
-scalaVersion := "2.10.0-RC5"
+scalaVersion := "2.10.0"
 
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature", "-language:reflectiveCalls")
 
@@ -14,9 +14,9 @@ resolvers += "Local Maven Repository" at "file://"+Path.userHome.absolutePath+"/
 
 libraryDependencies := Seq(
       "jline"          % "jline"                % "2.9" ,
-      "org.scala-lang" % "scala-library"        % "2.10.0-RC5",
+      "org.scala-lang" % "scala-library"        % "2.10.0-",
       "org.mockito"    % "mockito-all"          % "1.9.0"   % "test",
-      "org.scalatest"  % "scalatest_2.10.0-RC5" % "1.8-B1"  % "test"
+      "org.scalatest"  % "scalatest_2.10" % "1.9.1"  % "test"
 )
 
 publishMavenStyle := true
