@@ -11,13 +11,13 @@ Yascli 是从[HouseMD](http://github.com/zhongl/housemd)中独立出来的scala�
 
 ## SBT
 
-`libraryDependencies += "com.github.zhongl" % "yascli_2.10.0" % "0.2.0"`
+`libraryDependencies += "com.github.zhongl" % "yascli_2.10" % "0.2.0"`
 
 ## MAVEN
 
     <dependency>
       <groupId>com.github.zhong</groupId>
-      <artifactId>yascli_2.10.0</artifactId>
+      <artifactId>yascli_2.10</artifactId>
       <version>0.2.0</version>
     </dependency>
 
